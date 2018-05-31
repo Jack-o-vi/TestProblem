@@ -4,18 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "[MainActivity]";
     public static final String INVALID = "Invalid number";
     public static final String YES = "Yes";
     public static final String NO = "No";
     public static final String WRONG = "Wrong number format";
     public static final int TASKS_MAX = 12;
+    private static final String TAG = "[MainActivity]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
     }
 
-
     /**
-     *
      * @param tasks input tasks
      * @param hours input total hours
      * @return result string
@@ -52,12 +49,7 @@ public class MainActivity extends AppCompatActivity {
             int result = 0;
 
             // Until all tasks are done
-            for (int i = 0; i < remain - 1; i++) {
-
-                // iterate result with 55 minutes
-                result += iterTime;
-            }
-
+            result = (remain - 1) * iterTime;
             // temporary logging
             Log.d(TAG, "Result min: " + result + " Min: " + ((h - 1) * minInH));
 
@@ -80,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         EditText etHours = findViewById(R.id.etHours);
         TextView tvResult = findViewById(R.id.tvResult);
         String result = perform(etTasks.getText().toString(), etHours.getText().toString());
-        if(result != null){
+        if (result != null) {
             tvResult.setText(result);
         }
     }
