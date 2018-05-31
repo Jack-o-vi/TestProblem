@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestProblem</string>
+    <string name="hint_tasks">Enter tasks: </string>
+    <string name="hint_hours">Enter hours: </string>
 </resources>
