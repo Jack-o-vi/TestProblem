@@ -11,6 +11,11 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "[MainActivity]";
+    public static final String INVALID = "Invalid number";
+    public static final String YES = "Yes";
+    public static final String NO = "No";
+    public static final String WRONG = "Wrong number format";
+    public static final int TASKS_MAX = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
     }
 
+
+    /**
+     *
+     * @param tasks input tasks
+     * @param hours input total hours
+     * @return result string
+     */
     public String perform(String tasks, String hours) {
         int minF = 1;
         int maxF = 11;
@@ -25,26 +37,39 @@ public class MainActivity extends AppCompatActivity {
         int maxH = 24;
         int iterTime = 55;
         int minInH = 60;
+
         try {
+            // Tasks per first hour
             int f = Integer.parseInt(tasks);
+            // Total amount of hours
             int h = Integer.parseInt(hours);
 
-            if (!(minF <= f && f <= maxF && minH <= h && h <= maxH)) return "Invalid number";
+            // Check the condition of right inputs 1 <= tasks <= 11 and 1<= hours <= 24
+            if (!(minF <= f && f <= maxF && minH <= h && h <= maxH)) return INVALID;
 
-            int remain = Testing.getTasksMax() - f;
+            // Calculate how many tasks remain
+            int remain = TASKS_MAX - f;
             int result = 0;
+
+            // Until all tasks are done
             for (int i = 0; i < remain - 1; i++) {
+
+                // iterate result with 55 minutes
                 result += iterTime;
             }
+
+            // temporary logging
             Log.d(TAG, "Result min: " + result + " Min: " + ((h - 1) * minInH));
+
+            // Check if amount of spent time on remaining tasks is less or equals to the Total time minus 1 first hour
             if (result <= ((h - 1) * minInH))
-                return "Yes";
-            else return "No";
+                return YES;
+            else return NO;
 
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            return "Wrong number format";
+            return WRONG;
         }
 
 
